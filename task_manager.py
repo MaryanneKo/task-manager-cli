@@ -3,6 +3,7 @@ import os
 
 TASKS_FILE = 'tasks.csv'
 
+# Load tasks from CSV file into a list of dictionaries
 def load_tasks():
     tasks = []
     if os.path.exists(TASKS_FILE):
@@ -11,6 +12,7 @@ def load_tasks():
             tasks = list(reader)
     return tasks
 
+# Save tasks back to the CSV file
 def save_tasks(tasks):
     with open(TASKS_FILE, 'w', newline='') as csvfile:
         fieldnames = ['id', 'title', 'completed']
@@ -18,6 +20,7 @@ def save_tasks(tasks):
         writer.writeheader()
         writer.writerows(tasks)
 
+# Display tasks, optionally filtering by pending only
 def list_tasks(tasks, only_pending=False):
     for task in tasks:
         if only_pending and task['completed'] == 'True':
